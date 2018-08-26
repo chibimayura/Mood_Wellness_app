@@ -11,7 +11,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 //grabs router page
-router.get('/quotes', function(req, res){
+router.get('/', function(req, res){
 	res.render('pages/quotes');
 });
 
