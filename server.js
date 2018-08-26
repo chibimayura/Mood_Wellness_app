@@ -8,18 +8,29 @@ app.use(methodOverride('_method'));
 app.set('view engine', 'ejs');
 
 //grabbing servers
-var quotesRoute = require('./routes/quotes.js');
 var dashboardRoute = require('./routes/dashboard.js');
-var meditationRoute = require('./routes/meditation.js');
-var foodsRoute = require('./routes/foods.js');
-var favoritesRoute = require('./routes/favorites.js');
-var diaryRoute = require('./routes/diary.js');
-var moodRoute = require('./route/mood.js');
+app.use('/dashboard', dashboardRoute);
 
-//index page
-app.get('/', function(req,res){
-	res.render('pages/index');
-});
+var diaryRoute = require('./routes/diary.js');
+app.use('/diary', diaryRoute);
+
+var favoritesRoute = require('./routes/favorites.js');
+app.use('/favorites', favoritesRoute);
+
+var foodsRoute = require('./routes/foods.js');
+app.use('/foods', foodsRoute);
+
+var meditationRoute = require('./routes/meditation.js');
+app.use('/meditation', meditationRoute);
+
+var moodRoute = require('./routes/mood.js');
+app.use('/mood', moodRoute);
+
+var quotesRoute = require('./routes/quotes.js');
+app.use('/quotes', quotesRoute);
+
+var songRoute = require('./routes/songs.js');
+app.use('/songs', songRoute);
 
 app.listen(3000, function(){
 	console.log('Running the server on PORT 3000');

@@ -12,10 +12,13 @@ app.use(bodyParser.json());
 
 //grabs router page
 router.get('/', function(req, res){
-	res.render('pages/meditation');
+	res.render('pages/songs');
 });
 
-//POST meditation if user meditates
+//GET songs
+//POST save songs
+
+
 
 //stays at the bottom of the file to export this portion to import into server.js
 module.exports = router;

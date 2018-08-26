@@ -1,6 +1,7 @@
 var express = require('express');
 var app = express();
 var router = express.Router();
+app.set('view engine', 'ejs');
 
 //grab database to store quick diary entries
 var mysql = require('mysql');
@@ -11,7 +12,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 //grabs router page
-router.get('/dashboard', function(req, res){
+router.get('/', function(req, res){
 	res.render('pages/dashboard');
 });
 
