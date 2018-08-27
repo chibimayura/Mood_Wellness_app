@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Mooderator [title here :)]</title>
+
+<!-- CSS -->
+    <% include ../partials/head %>
+
+	<style>
+		/* PLACEHOLDER CSS - WE CAN MAKE PRETTIER LATER */
+		html, body, main {
+			height: 100%;
+			width: 100%;
+			margin: auto;
+		}
+		body {
+			background-color: #ffcccc;
+			color: black;
+			font-family: sans-serif;
+			font-size: 12px;
+			line-height: 18px;
+			text-align: center;
+			top: 50%;
+			bottom: 50%;		
+		}
+		h1 {
+			font-size: 40px;
+			line-height: 150%;
+			color: #ff8080;
+		}
+		main {
+			position: fixed;
+			top: 25%;
+		}
+		select{
+			width: 200px;
+			color: #ff6666;
+			font-size: 20px;
+			font-family: cursive;
+			font-weight: bold;
+			padding: 5px 0;
+			margin: auto;
+			text-align: center;
+		}
+		.btn {
+			background-color: #ff8080;
+			color: #ffffff;
+			margin: auto;
+		}
+		.btn:hover{
+			background-color: #ff6666;
+		}
+	</style>
+</head>
+<body>
+    <main>
+    	<h1>How are you feeling today?</h1>
+    	<div>
+    		<form>
+    			<!-- TO DO -->
+    			<!-- POST ACTION -->
+    			<select>
+    				<option >I'm feeling...</option>
+    				<option>Happy</option>
+    				<option>Sad</option>
+    				<option>Angry</option>
+    				<option>Depressed</option>
+    				<option>Frustrated</option>
+    				<option>Tired</option>
+    			</select>
+    			<button class="btn">Submit</button>
+    		</form>
+    	</div>
+    </main>
+
+	<footer>
+        <% include ../partials/footer %>
+    </footer>
+    
+</body>
+</html>
