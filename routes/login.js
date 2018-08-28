@@ -33,7 +33,7 @@ router.get('/logging-in', function(req, res){
 
 		if(results[0]){
 			console.log(results[0] + 'exists');
-			res.redirect('/checkmood');
+			res.redirect('/mood');
 		}else {
 			console.log('no user found');
 			res.redirect('/');

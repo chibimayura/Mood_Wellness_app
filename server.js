@@ -8,9 +8,6 @@ app.use(methodOverride('_method'));
 app.set('view engine', 'ejs');
 
 //grabbing servers
-//Daily mood check in Page
-var dailyMoodRoute = require('./routes/checkmood.js');
-app.use('/checkmood', dailyMoodRoute);
 
 var logInRoute = require('./routes/login.js');
 app.use('/', logInRoute);
@@ -35,7 +32,7 @@ app.use('/foods', foodsRoute);
 var meditationRoute = require('./routes/meditation.js');
 app.use('/meditation', meditationRoute);
 
-//Mood Page
+//daily Mood Page
 var moodRoute = require('./routes/mood.js');
 app.use('/mood', moodRoute);
 
