@@ -14,7 +14,15 @@
 		<!-- Foods:
 		-display our suggestions(we will write a database with suggestions)
 		-users can input their suggestions for what mood, and why
-		-display how many people found it helpful and not helpful -->
+        -display how many people found it helpful and not helpful -->
+        
+        <div>
+                <% data.forEach(function(foods) { %>
+                    Food: <%= food %> <br><br>
+					Description: <%= description %> <br><br><BR><BR>
+				<% }); %>
+            
+        </div>
 
     </main>
 
