@@ -2,13 +2,54 @@
 <html lang="en">
 <head>
     <% include ../partials/head %>
+    <style type="text/css">
+        html, body{
+            width: 100%;
+            height: 100%;
+        }
+    	main {
+    		width: 50%;
+    		height: 100%;
+    		position: relative;
+    		top: 20%;
+    		margin: auto;
+    		text-align: center;
+    		color: #2eb8b8;
+    	}
+    	h1{
+    		font-size: 800%;
+    	}
+        a{
+            text-align: right;
+        }
+        form{
+            margin: auto;
+            width: 25%;
+            text-align: left;
+            margin-top: 20px;
+        }
+        input{
+            margin-bottom: 5px;
+            margin-right: 10px;
+            border-radius: 4px;
+            border: 1px solid #2eb8b8;
+            width: 200px;
+        }
+    </style>
 </head>
 <body>
 
     <main>
-        <h1><a href="/checkmood">Login In</a></h1>
+        <h1>Login In</h1>
 <!-- Log-in:
 		-username and password entry -->
+		<form method="GET" action="/logging-in">
+			<input type="text" name="username">
+            <br>
+			<input type="password" name="password">
+			<button>Submit</button>
+            <a href="/signup" id="signup">Sign Up</a>
+		</form>
         
     </main>
 
