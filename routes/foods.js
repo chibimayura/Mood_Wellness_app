@@ -10,11 +10,21 @@ var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-//grabs router page
+// grabs router page
 router.get('/', function(req, res){
 	res.render('pages/foods');
+	
 });
 
+// not working yet
+
+app.get('/foods', function(req, res){
+    connection.query('SELECT * FROM foods', function(res){
+        res.render('pages/foods', {
+            data: res
+        });
+    });
+});
 //GET more suggestion on food based on mood
 //POST food that also helps specific mood
 
