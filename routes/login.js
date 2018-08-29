@@ -3,9 +3,11 @@ var app = express();
 var router = express.Router();
 // var bcrypt = require('bcryptjs');
 
+
 //grab database to store quick diary entries
 var mysql = require('mysql');
 
+//creating connection to mysql
 var connection = mysql.createConnection({
 	host: "localhost",
 	port: 3306,
@@ -27,24 +29,45 @@ router.get('/', function(req, res){
 //Sign up
 //POST username and password
 router.get('/logging-in', function(req, res){
-
-	// res.json(req.query);
+	console.log(req);
 	connection.query('SELECT * FROM users WHERE username = ?', [req.query.username], function(error, results, fields){
-
-		if(results[0]){
-			console.log(results[0] + 'exists');
-			res.redirect('/mood');
-		}else {
-			console.log('no user found');
+		if(error) throw error;
+		if(results.length == 0){
 			res.redirect('/');
-		}
+		}else {
+			// res.json(results[0].id);
+			//grabs user's info
+			req.session.user_id = results[0].id;
+			req.session.user_name = results[0].username;
 
+			console.log(req.session.user_id);
+			res.redirect('/mood');
+		}
 	});
 
 });
-//Check password
 
+router.get('/test', function(req, res){
+	req.session.state = 'alabama';
+	res.send('session set');
+})
 
+router.get('/testt', function(req, res){
+	res.send(req.session.state)
+})
+
+//POST stores the user logged in in the current session
+router.get('/user/:id', function(req, res){
+	var user_info = {
+		user_id : req.session.user_id,
+		user_name: req.session.user_name
+	}
+	if(req.session.user_id == null){
+		res.redirect('/signup');
+	} else{
+		res.json(user_info);
+	}
+});
 
 //stays at the bottom of the file to export this portion to import into server.js
 module.exports = router;

@@ -1,6 +1,12 @@
 var express = require("express");
 var app = express();
 
+var cookieParser = require('cookie-parser');
+
+app.use(cookieParser());
+var session = require("express-session");
+app.use(session({ secret: 'app', cookie: { maxAge: 1*1000*60*60*24*365 }}));
+
 //to pull other routes into server
 var methodOverride = require('method-override');
 app.use(methodOverride('_method'));
