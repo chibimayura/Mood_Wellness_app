@@ -3,12 +3,6 @@ var app = express();
 var router = express.Router();
 // var bcrypt = require('bcryptjs');
 
-var cookieParser = require('cookie-parser');
-
-var session = require('express-session');
-app.use(session({ secret: 'app', cookie: { maxAge: 1*1000*60*60*24*365 }}));
-
-app.use(cookieParser());
 
 //grab database to store quick diary entries
 var mysql = require('mysql');
@@ -39,7 +33,7 @@ router.get('/logging-in', function(req, res){
 	connection.query('SELECT * FROM users WHERE username = ?', [req.query.username], function(error, results, fields){
 		if(error) throw error;
 		if(results.length == 0){
-			redirect('/');
+			res.redirect('/');
 		}else {
 			// res.json(results[0].id);
 			//grabs user's info
@@ -68,8 +62,11 @@ router.get('/user/:id', function(req, res){
 		user_id : req.session.user_id,
 		user_name: req.session.user_name
 	}
-
-	res.json(user_info);
+	if(req.session.user_id == null){
+		res.redirect('/signup');
+	} else{
+		res.json(user_info);
+	}
 });
 
 //stays at the bottom of the file to export this portion to import into server.js
