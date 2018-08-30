@@ -12,7 +12,16 @@
     <main>
         
 
+        <div>
+          <!-- <%= results %> -->
+          <ul>
+            <% results.forEach(function(quotes) { %>
+                <li><%= quotes.quote %> </li>
+            <% }); %>
 
+        </ul>
+
+        </div>
 <!-- Quotes:
 		popular:
 			-quotes order based on ranking by users
