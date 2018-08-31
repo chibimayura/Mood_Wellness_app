@@ -17,10 +17,11 @@
         -display how many people found it helpful and not helpful -->
         
         <div>
-                <% data.forEach(function(foods) { %>
-                    Food: <%= food %> <br><br>
-					Description: <%= description %> <br><br><BR><BR>
-				<% }); %>
+            <h1>Top Mood-Boosting Foods</h1>
+            <h3>Vote for your faves!</h3>
+            <div id="foodsHere">
+                <!-- foods populate here -->
+            </div>
             
         </div>
 
@@ -29,6 +30,6 @@
     <footer>
         <% include ../partials/footer %>
     </footer>
-    
+    <script src="/javascript/foodJax.js"></script>
 </body>
 </html>
