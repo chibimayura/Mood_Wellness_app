@@ -15,7 +15,7 @@ var connection = mysql.createConnection({
 
 //body parser to grab POST diary entries
 var bodyParser = require('body-parser');
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 //grabs router page
@@ -23,11 +23,42 @@ router.get('/', function(req, res){
 	
 	
 	connection.query('SELECT * FROM quotes', function(error, results, fields){
-			console.log(results);
-			res.render('pages/quotes', { results: results});
+
+		connection.query('SELECT mood FROM moods', function(error, moods, fields) {
+			// console.log(results, moods);
+			res.render('pages/quotes', { results: results, moods: moods});
+		})
+		
 	});
 
 });
+
+router.post('/ranking', function(req, res){
+	console.log(req.body);
+	// console.log(res);
+	// res.redirect('/');
+
+	// var query = connection.query(
+	//   "INSERT INTO quotes SET ?",
+	//   req.body,
+	//   function(err, response) {
+	//     res.redirect('/');
+	//   }
+	// );
+});
+
+// app.post('/create-quote', function(req, res){
+// 	console.log(req.body);
+
+
+// 	// var query = connection.query(
+// 	//   "INSERT INTO quotes SET ?",
+// 	//   req.body,
+// 	//   function(err, response) {
+// 	//     res.redirect('/');
+// 	//   }
+// 	// );
+// })
 
 //GET quotes based on mood & ranking
 //POST quotes related to mood

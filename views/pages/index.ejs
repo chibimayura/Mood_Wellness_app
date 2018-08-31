@@ -44,9 +44,8 @@
 <!-- Log-in:
 		-username and password entry -->
 		<form method="GET" action="/logging-in">
-			<input type="text" name="username">
-            <br>
-			<input type="password" name="password">
+			<input type="text" name="username" placeholder=" username">
+			<input type="password" name="password" placeholder=" password">
 			<button>Submit</button>
             <a href="/signup" id="signup">Sign Up</a>
 		</form>
@@ -57,6 +56,10 @@
         <% include ../partials/footer %>
     </footer>
     
+    <!-- Jquery -->
+    <% include ../partials/script %>
+    <script src="../../assets/javascript/login-signup.js"></script>
+
 </body>
 </html>
 
