@@ -16,6 +16,10 @@ app.set('view engine', 'ejs');
 // making the assets folder static
 app.use(express.static("assets"));
 
+var bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
 //grabbing servers
 
 var logInRoute = require('./routes/login.js');

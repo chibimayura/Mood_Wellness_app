@@ -5,9 +5,10 @@ $.ajax({
     var p, name, desc;
     for (i=0; i<data.length; i++){
         name = data[i].food_name;
-        desc = data[i].description;
+        info = data[i].info;
+        likes = data[i].works;
         p = $('<p>');
-        p.text(name + ' - ' + desc);
+        p.text(name + ' - ' + info + ' - ' + likes + ' people think it works!');
         $('#foodsHere').append(p);
     }
 });

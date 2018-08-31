@@ -16,12 +16,37 @@
 		-users can input their suggestions for what mood, and why
         -display how many people found it helpful and not helpful -->
         
+
         <div>
             <h1>Top Mood-Boosting Foods</h1>
-            <h3>Vote for your faves!</h3>
+            <div id="addFoods">
+                    <h3>Add your own Mood Food!</h3>
+                <form method="POST" action="/foods/create">
+                    <p>
+                    <input type="text" name="food_name" placeholder="Add a mood-boosting food!">
+                    <input type="text" name="info" placeholder="Add a description!">
+                    </p>
+                <p class="bold">How does this food make you feel?</p> 
+                    <p>
+                    <input type="radio" name="mood_id" value="1"> Happy 
+                    <input type="radio" name="mood_id" value="2"> Sad 
+                    <input type="radio" name="mood_id" value="3"> Angry  
+                    <input type="radio" name="mood_id" value="4"> Neutral
+                    </p>
+                <p class="bold">Does it boost your mood?</p> 
+                    <p>
+                    <input type="radio" name="works" value="1"> Yes! 
+                    <input type="radio" name="works" value="-1"> No!
+                    </p>
+                    <p>
+                        <button>Submit</button>
+                    </p>
+            </div>
+            <h3>Vote for your favorites!</h3>
             <div id="foodsHere">
                 <!-- foods populate here -->
             </div>
+
             
         </div>
 
