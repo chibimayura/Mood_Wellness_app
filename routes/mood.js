@@ -24,6 +24,10 @@ router.get('/', function(req, res){
 });
 
 //POST mood of the day of user to history
+	//
+router.post('/post-mood', function(req, res){
+
+});
 
 //stays at the bottom of the file to export this portion to import into server.js
 module.exports = router;
