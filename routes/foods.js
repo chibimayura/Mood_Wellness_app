@@ -10,21 +10,27 @@ var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+// connects to mysql
+var connection = mysql.createConnection({
+	host: "localhost",
+	port: 3306,
+	user: "root",
+	password: "password",
+	database: "wellness_db"
+  });
+
 // grabs router page
 router.get('/', function(req, res){
-	res.render('pages/foods');
-	
+    res.render('pages/foods');
 });
 
-// not working yet
-
-app.get('/foods', function(req, res){
-    connection.query('SELECT * FROM foods', function(res){
-        res.render('pages/foods', {
-            data: res
-        });
+router.get('/foodsData', function(req, res){
+    connection.query("SELECT * FROM foods", function(error, results, body) {
+        if (error) throw error;
+	    res.json(results);
     });
 });
+
 //GET more suggestion on food based on mood
 //POST food that also helps specific mood
 

@@ -7,6 +7,9 @@ app.use(methodOverride('_method'));
 
 app.set('view engine', 'ejs');
 
+// making the assets folder static
+app.use(express.static("assets"));
+
 //grabbing servers
 
 var logInRoute = require('./routes/login.js');
