@@ -12,13 +12,18 @@
     <main>
         
 
+        <div>
 
-<!-- Quotes:
-		popular:
-			-quotes order based on ranking by users
-		add:
-			-allows users to enter their own self-motivating quotes, for what mood
-			-see recently added quotes -->
+          <ul>
+            <% results.forEach(function(quotes) { %>
+                <form method="POST" action="quotes/ranking">
+                    <button name="quote_id" value="<%= quotes.id %>"><input type="hidden" name="rank" value="<%= quotes.ranking=parseInt(quotes.ranking) + 1 %>"></button><%= quotes.quote %>
+                </form>
+            <% }); %>
+        </ul>
+    
+
+        </div>
             
             
     </main>
@@ -26,7 +31,8 @@
     <footer>
         <% include ../partials/footer %>
     </footer>
-    
+
+   
 </body>
 </html>
 

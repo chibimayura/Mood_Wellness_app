@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/chibimayura/Mood_Wellness_app#readme",
   "dependencies": {
-    "bcrypt": "^3.0.0",
+    "bcrypt": "2.0.1",
     "body-parser": "^1.18.3",
     "cookie-parser": "^1.4.3",
     "ejs": "^2.6.1",
