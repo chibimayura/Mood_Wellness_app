@@ -54,12 +54,21 @@ router.get('/user/:id', function(req, res){
 	}
 });
 
+//GET users info to check with sign-up page, only display email and username
+router.get('/user-database', function(req, res){
+	connection.query('SELECT id, username, email FROM users', function(error, results){
+		res.json(results);
+	});
+});
+
 /*
 	Sign up to Wellness app Routes
 */
 router.get('/sign-up', function(req, res){
 	//using same index template but changing the h1 and form to get sign-up information
-	res.render('pages/index');
+	connection.query('SELECT username, email FROM users', function(error, results, fields){
+		res.render('pages/index');
+	});
 });
 
 router.post('/signing-up', function(req, res){
