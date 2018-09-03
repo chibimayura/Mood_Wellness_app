@@ -76,7 +76,7 @@ if(url.includes('/sign-up')){
 		'padding' : '10% 5%',
 		'overflow' : 'hidden'
 	});
-}
+
 
 //form is preventDefault until meets requirements
 formSelector.submit( function(ev){
@@ -136,3 +136,4 @@ $(document).on('click', 'button', function(event){
 		});
 	}
 });
+}

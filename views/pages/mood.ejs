@@ -57,15 +57,15 @@
     <main>
         <h1>How are you feeling today?</h1>
         <div>
-            <form>
+            <form method="POST" action="/mood/post-mood">
                 <!-- TO DO -->
                 <!-- POST ACTION -->
-                <select method="POST" action="/post-mood">
+                <select name="mood_id">
                     <option>I'm feeling...</option>
-                    <option mood_id="1">Happy</option>
-                    <option mood_id="2">Sad</option>
-                    <option mood_id="3">Angry</option>
-                    <option mood_id="4">Neutral</option>
+                    <option value="1">Happy</option>
+                    <option value="2">Sad</option>
+                    <option value="3">Angry</option>
+                    <option value="4">Neutral</option>
                 </select>
                 <button class="btn">Submit</button>
             </form>
