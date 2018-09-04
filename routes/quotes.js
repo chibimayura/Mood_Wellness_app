@@ -27,10 +27,8 @@ router.get('/', function(req, res){
 		connection.query('SELECT mood, id FROM moods', function(error, moods, fields) {
 			
 			res.render('pages/quotes', { results: results, moods: moods})
-		})
-		
-	// });
-	}
+			})
+		}
 	)}
 );
 
@@ -41,6 +39,7 @@ router.post('/ranking', function(req, res){
 	var insertParams = [req.body.quote, req.body.mood_id];
 
 	// update quotes table if user thumbs up a quote on page
+	
 	if (req.body.rank) {
 		var updateQuery = connection.query(
 			"UPDATE quotes SET ranking = ? where id = ? ",

@@ -8,34 +8,28 @@
     <header>
         <% include ../partials/header %>
     </header>
-
-    <main>
-        
-
-        <div>
-
-          
-            <% results.forEach(function(quotes) { %>
-                <form method="POST" action="quotes/ranking">
-                    <button name="quote_id" value="<%= quotes.id %>"><input type="hidden" name="rank" value="<%= quotes.ranking=parseInt(quotes.ranking) + 1 %>"></button><%= quotes.quote %>
-                    </form>
-            <% }); %>
-            <form method="POST" action="quotes/ranking">
-                <p>Add Quote:
-                    <input type="text" name="quote" placeholder="add your favorite quotes here">
     
-                   
+    <main>
+        <div>
+            <h3>Favorite Quotes</h3>
+            
+            <% results.forEach(function(quotes) { %>
+                <p>
+                    <form method="POST" action="quotes/ranking">
+                    <button name="quote_id" value="<%= quotes.id %>"><input type="hidden" name="rank" value="<%= quotes.ranking=parseInt(quotes.ranking) + 1 %>"><i class="fa fa-thumbs-up"></i> Like </button> <%= quotes.quote %>
+                    </form>
+                </p>
+            <% }); %>
+
+            <form method="POST" action="quotes/ranking">
+                <p>Add Quote: <input type="text" name="quote" placeholder="add your favorite quotes here">
                     <% moods.forEach(function(m) { %>
-            
-                        <input type="radio" name="mood_id" value="<%= m.id %>" ><%= m.mood %></button>
-                       
+                        <input type="radio" name="mood_id" value="<%= m.id %>" > <%= m.mood %> </button>
+                        
                     <% }); %>
-                
                     <button>Submit</button> </p>
-                </form>
-        </div>
-            
-            
+            </form>
+        </div>          
     </main>
 
     <footer>
