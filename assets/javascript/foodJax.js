@@ -20,22 +20,27 @@ $.ajax({
         downvote.text('👎');
 
         // make paragraph with each food
-        p = $('<p>');
-        p.html('<b>' + name + '</b><br>' + info + '<br>' + likes + ' people think it works!<br>');
+        div = $('<div>');
+        div.html('<b>' + name + '</b><br>' + info + '<br>' + likes + ' people think it works!<br>');
 
         // make buttons into forms that modify the db
         formUp = $('<form>')
         formUp.attr('method', 'POST');
         formUp.attr('action', '/foods/upvote/' + id + '/' + likes);
         formUp.append(upvote);
+        formUp.append(' Agreed!')
 
         formDown = $('<form>');
         formDown.attr('method', 'POST');
         formDown.attr('action', '/foods/downvote/' + id + '/' + likes);
         formDown.append(downvote);
+        formDown.append(' No way!')
+
         
-        p.append(formUp);
-        p.append(formDown);
-        $('#foodsHere').append(p);
+        div.append(formUp);
+        div.append(formDown);
+        $('#foodsHere').append(div);
+        $('#foodsHere').append('<br>');
+
     }
 });
