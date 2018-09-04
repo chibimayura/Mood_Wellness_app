@@ -51,7 +51,6 @@ router.post('/create', function(req, res){
 
 
 // upvote function
-var votes;
 
 router.post('/upvote/:id/:works', function(req, res){
 

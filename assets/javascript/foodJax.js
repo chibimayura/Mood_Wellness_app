@@ -19,7 +19,7 @@ $.ajax({
         upvote.text('👍');
         downvote.text('👎');
 
-        // make paragraph with each food
+        // make div with each food
         div = $('<div>');
         div.html('<b>' + name + '</b><br>' + info + '<br>' + likes + ' people think it works!<br>');
 
