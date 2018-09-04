@@ -40,6 +40,7 @@ router.post('/ranking', function(req, res){
 	var updateParams = [req.body.rank, req.body.quote_id];
 	var insertParams = [req.body.quote, req.body.mood_id];
 
+	// update quotes table if user thumbs up a quote on page
 	if (req.body.rank) {
 		var updateQuery = connection.query(
 			"UPDATE quotes SET ranking = ? where id = ? ",
@@ -49,11 +50,14 @@ router.post('/ranking', function(req, res){
 			  res.redirect('/quotes');
 			}
 		  );
-	} else if (req.body.quote) {
+	} 
+	// inserts new quote submitted by user
+	else if (req.body.quote) {
 		var insertQuery = connection.query(
 			"INSERT INTO quotes (quote, mood_id) values (?, ?)",
 			insertParams,
 			function(err, response) {
+			if (err) throw err 
 			  console.log('inserted');
 			  res.redirect('/quotes');
 			}
