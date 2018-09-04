@@ -14,9 +14,9 @@ var connection = mysql.createConnection({
 });
 
 //body parser to grab POST diary entries
-const bodyParser = require('body-parser');
-router.use(bodyParser.urlencoded({ extended: true }));
-router.use(bodyParser.json());
+// const bodyParser = require('body-parser');
+// router.use(bodyParser.urlencoded({ extended: true }));
+// router.use(bodyParser.json());
 
 //grabs router page
 router.get('/', function(req, res){

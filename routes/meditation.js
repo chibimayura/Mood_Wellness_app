@@ -23,7 +23,9 @@ router.get('/', function(req, res){
 	res.render('pages/meditation');
 });
 
+//store meditation into database and redirects to meditation page
 router.post('/amount-meditated', function(req, res){
+	// connection.query('');
 	res.redirect('/meditation');
 });
 

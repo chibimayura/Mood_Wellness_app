@@ -22,6 +22,7 @@ router.get('/', function(req, res){
 
 //POST username and password
 router.post('/logging-in', function(req, res){
+
 	connection.query('SELECT * FROM users WHERE username = ? AND password = ?', [req.body.username, req.body.password], function(error, results, fields){
 		if(error) throw error;
 
@@ -32,7 +33,39 @@ router.post('/logging-in', function(req, res){
 			req.session.user_id = results[0].id;
 			req.session.user_name = results[0].username;
 
-			res.redirect('/mood');
+			//grabs login date and stores into session to check if already logged mood that day and only add amount of time meditated that day
+			var currentLoginDate = new Date();
+			currentLoginDate = JSON.stringify(currentLoginDate).slice(1,11);
+			req.session.login_time = currentLoginDate;
+
+			//checks if user logged their mood today
+			connection.query('SELECT created_at, mood_id FROM histories WHERE user_id = ?', [req.session.user_id], function(error, results, fields){
+
+				if(results.length == 0){
+					//creating a new meditation log
+					connection.query('INSERT INTO meditation SET user_id = ?', [req.session.user_id], function(error, results){
+						console.log('created meditation log starting at 0 times meditated');
+						res.redirect('/mood');
+					})
+				} else {
+					//checks last login date for comparison with current login time
+					var lastLoginDate = JSON.stringify(results[results.length-1].created_at).slice(1,11);
+
+					if(lastLoginDate == currentLoginDate){
+						req.session.current_mood = results[results.length-1].mood_id;
+						req.session.current_login_date = lastLoginDate;
+						res.redirect('/dashboard');
+					} else{
+						//creating a new meditation log
+						connection.query('INSERT INTO meditation SET user_id = ?', [req.session.user_id], function(error, results){
+							console.log('created meditation log starting at 0 times meditated');
+							res.redirect('/mood');
+						})
+					}
+				}
+
+			});
+
 		}
 	});
 
@@ -42,7 +75,9 @@ router.post('/logging-in', function(req, res){
 router.get('/user_info', function(req, res){
 	var user_info = {
 		user_id : req.session.user_id,
-		user_name: req.session.user_name
+		user_name : req.session.user_name,
+		timestamp : req.session.current_login_date,
+		mood_id : req.session.current_mood
 	}
 	if(req.session.user_id == null){
 		res.redirect('/sign-up');

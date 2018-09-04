@@ -1,5 +1,5 @@
 
-INSERT INTO users (username, password, email) VALUES ('user1', 'pass1', 'e@yahoo.com''', 1, true), ('user2', 'pass2', 'm@yahoo.com''', 1, true), ('user3', 'pass3', 'a@yahoo.com'), ('user4', 'pass4', 'i@yahoo.com'), ('user5', 'pass5', 'l@yahoo.com');
+INSERT INTO users (username, password, email) VALUES ('user1', 'pass1', 'e@yahoo.com'), ('user2', 'pass2', 'm@yahoo.com'), ('user3', 'pass3', 'a@yahoo.com'), ('user4', 'pass4', 'i@yahoo.com'), ('user5', 'pass5', 'l@yahoo.com');
 
 INSERT INTO diaries (user_id, text) VALUES (1, 'This will work.'), (2, 'Today will be great.'), (3, 'Fingers-Crossed.');
 
