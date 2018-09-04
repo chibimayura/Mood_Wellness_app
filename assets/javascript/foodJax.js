@@ -13,9 +13,9 @@ $.ajax({
         upvote = $('<button>');
         downvote = $('<button>');
         upvote.attr('name', 'works');
-        upvote.attr('value', '1');
+        upvote.attr('value', 1);
         downvote.attr('name', 'works');
-        downvote.attr('value', '-1');
+        downvote.attr('value', -1);
         upvote.text('👍');
         downvote.text('👎');
 
@@ -26,12 +26,12 @@ $.ajax({
         // make buttons into forms that modify the db
         formUp = $('<form>')
         formUp.attr('method', 'POST');
-        formUp.attr('action', '/foods/upvote/' + id);
+        formUp.attr('action', '/foods/upvote/' + id + '/' + likes);
         formUp.append(upvote);
 
         formDown = $('<form>');
         formDown.attr('method', 'POST');
-        formDown.attr('action', '/foods/downvote/' + id);
+        formDown.attr('action', '/foods/downvote/' + id + '/' + likes);
         formDown.append(downvote);
         
         p.append(formUp);
