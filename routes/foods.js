@@ -55,6 +55,32 @@ router.post('/create', function(req, res){
 	console.log(query);
 });
 
+router.post('/upvote/:id', function(req, res){
+	console.log(req.body);
+	var addVote = req.body.works + 1
+	var query = connection.query(
+	  "UPDATE foods WHERE id = ?",
+	  [addVote, req.params.id],
+	  function(err, response) {
+		  if (err) throw error;
+		  console.log(req.body);
+
+	    res.redirect('/foods');
+	  }
+	);
+	console.log(query);
+});
+
+// app.post('/update/:id', function(req, res){
+// 	var query = connection.query(
+// 	  "UPDATE questions SET ? WHERE id = ?",
+// 	  [req.body, req.params.id],
+// 	  function(err, response) {
+// 	    res.redirect('/');
+// 	  }
+// 	);
+// });
+
 
 //stays at the bottom of the file to export this portion to import into server.js
 module.exports = router;
