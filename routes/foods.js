@@ -5,6 +5,10 @@ var router = express.Router();
 //grab database to store quick diary entries
 var mysql = require('mysql');
 
+var bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
 // connects to mysql
 var connection = mysql.createConnection({
 	host: "localhost",
@@ -27,17 +31,7 @@ router.get('/foodsData', function(req, res){
     });
 });
 
-//GET more suggestion on food based on mood
-//POST food that also helps specific mood
-
-
-// this works, desplays JSON
-// router.get('/create', function(req, res){
-//     connection.query("SELECT * FROM foods", function(error, results, body) {
-//         if (error) throw error;
-// 	    res.json(results);
-//     });
-// });
+// mysql to add food to the database
 
 router.post('/create', function(req, res){
 	console.log(req.body);
@@ -55,17 +49,36 @@ router.post('/create', function(req, res){
 	console.log(query);
 });
 
+
+// upvote function
 router.post('/upvote/:id', function(req, res){
 	console.log(req.body);
-	var addVote = req.body.works + 1
+	var addVote = JSON.stringify(parseFloat(req.body.works));
 	var query = connection.query(
-	  "UPDATE foods WHERE id = ?",
+	  "UPDATE foods SET works = ? WHERE id = ?",
 	  [addVote, req.params.id],
 	  function(err, response) {
 		  if (err) throw error;
 		  console.log(req.body);
 
-	    res.redirect('/foods');
+	    res.redirect('/foods/');
+	  }
+	);
+	console.log(query);
+});
+
+// downvote function
+router.post('/downvote/:id', function(req, res){
+	console.log(req.body);
+	var removeVote = JSON.stringify(parseFloat(req.body.works));
+	var query = connection.query(
+	  "UPDATE foods SET works = ? WHERE id = ?",
+	  [removeVote, req.params.id],
+	  function(err, response) {
+		  if (err) throw error;
+		  console.log(req.body);
+
+	    res.redirect('/foods/');
 	  }
 	);
 	console.log(query);

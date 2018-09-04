@@ -2,26 +2,40 @@ $.ajax({
 	url: '/foods/foodsData',
 	method: 'GET'
 }).then(function(data){
-    var p, name, likes, upvote, downvote, id;
+    var p, name, likes, upvote, downvote, id, formUp, formDown;
     for (i=0; i<data.length; i++){
         name = data[i].food_name;
         info = data[i].info;
         likes = data[i].works;
-        id = i + 1;
-        upvote = $('<a>');
-        downvote = $('<a>');
+        id = parseFloat(i + 1);
+
+        // make buttons with thumbs up and thumbs down
+        upvote = $('<button>');
+        downvote = $('<button>');
         upvote.attr('name', 'works');
         upvote.attr('value', '1');
         downvote.attr('name', 'works');
         downvote.attr('value', '-1');
         upvote.text('👍');
         downvote.text('👎');
-        upvote.attr('href', '/foods/upvote/' + id);
-        downvote.attr('href', '/foods/downvote/' + id);
+
+        // make paragraph with each food
         p = $('<p>');
-        p.html('<b>' + name + '</b><br>' + info + '<br>' + likes + ' people think it works!');
-        p.append(upvote);
-        p.append(downvote);
+        p.html('<b>' + name + '</b><br>' + info + '<br>' + likes + ' people think it works!<br>');
+
+        // make buttons into forms that modify the db
+        formUp = $('<form>')
+        formUp.attr('method', 'POST');
+        formUp.attr('action', '/foods/upvote/' + id);
+        formUp.append(upvote);
+
+        formDown = $('<form>');
+        formDown.attr('method', 'POST');
+        formDown.attr('action', '/foods/downvote/' + id);
+        formDown.append(downvote);
+        
+        p.append(formUp);
+        p.append(formDown);
         $('#foodsHere').append(p);
     }
 });
