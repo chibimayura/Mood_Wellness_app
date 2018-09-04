@@ -42,7 +42,11 @@ router.post('/logging-in', function(req, res){
 			connection.query('SELECT created_at, mood_id FROM histories WHERE user_id = ?', [req.session.user_id], function(error, results, fields){
 
 				if(results.length == 0){
-					res.redirect('/mood');
+					//creating a new meditation log
+					connection.query('INSERT INTO meditation SET user_id = ?', [req.session.user_id], function(error, results){
+						console.log('created meditation log starting at 0 times meditated');
+						res.redirect('/mood');
+					})
 				} else {
 					//checks last login date for comparison with current login time
 					var lastLoginDate = JSON.stringify(results[results.length-1].created_at).slice(1,11);
@@ -52,7 +56,11 @@ router.post('/logging-in', function(req, res){
 						req.session.current_login_date = lastLoginDate;
 						res.redirect('/dashboard');
 					} else{
-						res.redirect('/mood');
+						//creating a new meditation log
+						connection.query('INSERT INTO meditation SET user_id = ?', [req.session.user_id], function(error, results){
+							console.log('created meditation log starting at 0 times meditated');
+							res.redirect('/mood');
+						})
 					}
 				}
 
