@@ -16,10 +16,12 @@
 		-a button to allow user to start meditation
 		-have user pick set time to meditate for(1 min, 5 min, 10 min, nonstop) -->
         <!-- .js will use ajax's POST method -->
-        <button>1:00</button>
-        <button>5:00</button>
-        <button>10:00</button>
-        <button>Non-stop</button>
+        <form method="POST" action="/amount-meditated">
+            <button class="btn">1:00</button>
+            <button class="btn">5:00</button>
+            <button class="btn">10:00</button>
+        </form>
+        <!-- <button class="btn">Non-stop</button> -->
         
     </main>
 
