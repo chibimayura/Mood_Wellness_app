@@ -5,7 +5,6 @@ var router = express.Router();
 //grab database to store quick diary entries
 var mysql = require('mysql');
 
-//body parser to grab POST diary entries
 var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -24,6 +23,7 @@ router.get('/', function(req, res){
     res.render('pages/foods');
 });
 
+// For AJAX query to add foods to page
 router.get('/foodsData', function(req, res){
     connection.query("SELECT * FROM foods", function(error, results, body) {
         if (error) throw error;
@@ -31,10 +31,52 @@ router.get('/foodsData', function(req, res){
     });
 });
 
-//GET more suggestion on food based on mood
-//POST food that also helps specific mood
+// mysql to add food to the database
+
+router.post('/create', function(req, res){
+	console.log(req.body);
+
+	var query = connection.query(
+	  "INSERT INTO foods SET ?",
+	  req.body,
+	  function(err, response) {
+		  if (err) throw error;
+		  console.log(req.body);
+
+	    res.redirect('/foods');
+	  }
+	);
+	console.log(query);
+});
 
 
+// upvote function
+
+router.post('/upvote/:id/:works', function(req, res){
+
+	var query = connection.query(
+	  "UPDATE foods SET works = ? WHERE id = ?",
+	  [parseFloat(req.body.works) + parseFloat(req.params.works), req.params.id],
+	  	function(err, response) {
+			if (err) throw error;
+	    	res.redirect('/foods/');
+	  }
+	);
+	// console.log(query);
+});
+
+// downvote function
+router.post('/downvote/:id/:works', function(req, res){
+	var query = connection.query(
+	  "UPDATE foods SET works = ? WHERE id = ?",
+	  [parseFloat(req.body.works) + parseFloat(req.params.works), req.params.id],
+	  	function(err, response) {
+			if (err) throw error;
+			res.redirect('/foods/');
+	  }
+	);
+	// console.log(query);
+});
 
 //stays at the bottom of the file to export this portion to import into server.js
 module.exports = router;

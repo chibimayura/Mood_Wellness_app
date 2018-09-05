@@ -63,10 +63,10 @@ CREATE TABLE favorites (
 
 CREATE TABLE foods (
     id INT NOT NULL AUTO_INCREMENT,
-    food_name VARCHAR(500) NOT NULL,
-    mood_id INT NOT NULL,
-    description VARCHAR(255) NOT NULL,
-    works BOOLEAN NOT NULL,
+    food_name VARCHAR(500) NULL,
+    mood_id INT NULL,
+    info VARCHAR(255) NULL,
+    works INT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY(mood_id) REFERENCES moods(id)
 );
