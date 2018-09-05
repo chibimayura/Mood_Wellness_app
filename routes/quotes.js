@@ -9,14 +9,14 @@ var connection = mysql.createConnection({
 	host: "localhost",
 	port: 3306,
 	user: "root",
-	password: "10Strawberry!",
+	password: "password",
 	database: "wellness_db"
 });
 
-//body parser to grab POST diary entries
-// const bodyParser = require('body-parser');
-// router.use(bodyParser.urlencoded({ extended: true }));
-// router.use(bodyParser.json());
+// body parser to grab POST diary entries
+const bodyParser = require('body-parser');
+router.use(bodyParser.urlencoded({ extended: true }));
+router.use(bodyParser.json());
 
 //grabs router page
 router.get('/', function(req, res){
