@@ -2,13 +2,8 @@ var express = require('express');
 var app = express();
 var router = express.Router();
 
-//grab database to store quick diary entries
+//grab database to store meditation progress
 var mysql = require('mysql');
-
-//body parser to grab POST diary entries
-var bodyParser = require('body-parser');
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
 
 var connection = mysql.createConnection({
 	host: "localhost",
