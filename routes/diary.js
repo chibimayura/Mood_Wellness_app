@@ -15,8 +15,41 @@ router.get('/', function(req, res){
 	res.render('pages/diary');
 });
 
-//allows user to GET previous diary entries and POST diary entries
+router.get('/user_info', function(req, res){
+	var user_info = {
+		user_id : req.session.user_id,
+		user_name : req.session.user_name,
+		timestamp : req.session.current_login_date,
+		mood_id : req.session.current_mood
+	};
+	res.json(user_info);
+});
 
+// For AJAX query to add old diary entries to page
+router.get('/diaryEntries', function(req, res){
+    var query = connection.query("SELECT * FROM diaries WHERE user_id = ?",user_info.user_id, function(error, results, body) {
+        if (error) throw error;
+	    res.json(results);
+    });
+});
+
+// mysql to add diary entries to the database
+
+router.post('/create', function(req, res){
+	console.log(req.body);
+
+	var query = connection.query(
+	  "INSERT INTO diaries SET text = ? WHERE user_id = ?",
+	  [req.body, user_info.user_id],
+	  function(err, response) {
+		  if (err) throw error;
+		  console.log(req.body);
+
+	    res.redirect('/diary');
+	  }
+	);
+	console.log(query);
+});
 
 
 //stays at the bottom of the file to export this portion to import into server.js
