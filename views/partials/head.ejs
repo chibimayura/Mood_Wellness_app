@@ -8,13 +8,30 @@
 
 <style>
 	/* PLACEHOLDER CSS - WE CAN MAKE PRETTIER LATER */
+	html {
+		min-height: 100%;
+		position: relative;
+		margin: 0;
+	}
 	body {
 		background-color: rgb(194, 255, 252);
 		color: black;
 		font-family: sans-serif;
 		font-size: 12px;
 		line-height: 18px;
-		margin: 50px 0px auto;
+		margin:auto;
+		margin: 0 0 75px;
+	}
+	.navbar {
+		padding: 10px; 
+		margin-bottom: 20px;
+		background-color: #29a3a3;
+		font-size: 16px;
+		font-weight: bold;
+	}
+	.navbar-brand {
+		font-size: 30px !important;
+		font-weight: bolder;
 	}
 	main {
 		width: 70%;
@@ -22,6 +39,7 @@
 		background-color: white;
 		opacity: 0.9;
 		text-align: center;
+		position: relative;
 	}
 	h1, h2, h3 {
 		font-family: forte;
@@ -58,8 +76,11 @@
 	footer{
 		text-align: center;
 		width: 100%;
-		position: fixed;
+		height: 50px;
+		position: absolute;
+		font-size: 14px;
 		bottom: 0;
+		left: 0;
 	}
 	.footerLink a:link, .footerLink a:hover {
 		font-size: 8px;
