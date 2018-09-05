@@ -9,7 +9,7 @@ var connection = mysql.createConnection({
 	host: "localhost",
 	port: 3306,
 	user: "root",
-	password: "password",
+	password: "10Strawberry!",
 	database: "wellness_db"
 });
 
@@ -39,7 +39,7 @@ router.post('/ranking', function(req, res){
 	var insertParams = [req.body.quote, req.body.mood_id];
 
 	// update quotes table if user thumbs up a quote on page
-	
+
 	if (req.body.rank) {
 		var updateQuery = connection.query(
 			"UPDATE quotes SET ranking = ? where id = ? ",
@@ -63,5 +63,6 @@ router.post('/ranking', function(req, res){
 		  );
 	}
 });
+
 
 module.exports = router;
