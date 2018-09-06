@@ -20,8 +20,7 @@ router.use(bodyParser.json());
 
 //grabs router page
 router.get('/', function(req, res){
-	
-	
+
 	connection.query('SELECT * FROM quotes ORDER BY ranking DESC', function(error, results, fields) {
 		
 		connection.query('SELECT mood, id FROM moods', function(error, moods, fields) {
