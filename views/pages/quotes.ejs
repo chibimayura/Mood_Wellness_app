@@ -7,32 +7,52 @@
 
     <header>
         <% include ../partials/header %>
+        <style type="text/css">
+        body, .btn {
+            font-family: sans-serif;
+            font-size: 14px;
+        }
+        </style>
     </header>
 
     <main>
-        
-
         <div>
+            <h2>Quotes</h2>
+            <br>
+            <div>
+                <h5 id="runquote"></h5>
+                <button class="btn btn-success" id="get-another-quote-button">New Quote</button>
+                <button class="btn btn-secondary" id="get-another-quote-button">Add to List</button>
+               
+                <!-- Code here to grab quote and render on page -->
 
-          <ul>
+            </div>
+
             <% results.forEach(function(quotes) { %>
-                <form method="POST" action="quotes/ranking">
-                    <button name="quote_id" value="<%= quotes.id %>"><input type="hidden" name="rank" value="<%= quotes.ranking=parseInt(quotes.ranking) + 1 %>"></button><%= quotes.quote %>
-                </form>
+                <p>
+                    <form method="POST" action="quotes/ranking">
+                    <button class="btn btn-primary" name="quote_id" value="<%= quotes.id %>"><input type="hidden" name="rank" value="<%= quotes.ranking=parseInt(quotes.ranking) + 1 %>"><i class="fa fa-thumbs-up"></i> <%= quotes.ranking %> Likes </button> <%= quotes.quote %>
+                    </form>
+                </p>
             <% }); %>
-        </ul>
-    
 
-        </div>
-            
-            
+            <form method="POST" action="quotes/ranking">
+                <p>Add Quote: <input type="text" name="quote" placeholder="add your favorite quotes here">
+                <!-- For future work - Add Mood: <input type="text" name="mood" placeholder="add your mood here"> -->
+                    Select a Mood: <% moods.forEach(function(m) { %>
+                        <input type="radio" name="mood_id" value="<%= m.id %>" > <%= m.mood %> </button>
+                        
+                    <% }); %>
+                <button class="btn btn-secondary">Submit</button> </p>
+            </form>
+        </div>          
     </main>
 
     <footer>
         <% include ../partials/footer %>
     </footer>
 
-   
+    <script src="/javascript/quotesJax.js"></script>
 </body>
 </html>
 
