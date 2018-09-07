@@ -41,25 +41,26 @@ CREATE TABLE histories (
 
 CREATE TABLE quotes (
     id INT NOT NULL AUTO_INCREMENT,
+    user_id INT NOT NULL,
     quote VARCHAR(500) NOT NULL,
     ranking INT DEFAULT 0,
     mood_id INT NOT NULL,
     PRIMARY KEY (id),
-    FOREIGN KEY(mood_id) REFERENCES moods(id)
+    FOREIGN KEY(mood_id) REFERENCES moods(id), FOREIGN KEY(user_id) REFERENCES users(id)
 );
 
-CREATE TABLE favorites (
-    id INT NOT NULL AUTO_INCREMENT,
-    quote VARCHAR(500) NOT NULL,
-    ranking INT,
-    user_id INT NOT NULL,
-    mood_id INT NOT NULL,
-    section VARCHAR(255) NOT NULL,
-    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (id),
-    FOREIGN KEY (user_id) REFERENCES users(id),
-    FOREIGN KEY(mood_id) REFERENCES moods(id)
-);
+-- CREATE TABLE favorites (
+--     id INT NOT NULL AUTO_INCREMENT,
+--     quote VARCHAR(500) NOT NULL,
+--     ranking INT,
+--     user_id INT NOT NULL,
+--     mood_id INT NOT NULL,
+--     section VARCHAR(255) NOT NULL,
+--     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+--     PRIMARY KEY (id),
+--     FOREIGN KEY (user_id) REFERENCES users(id),
+--     FOREIGN KEY(mood_id) REFERENCES moods(id)
+-- );
 
 CREATE TABLE foods (
     id INT NOT NULL AUTO_INCREMENT,
@@ -88,4 +89,16 @@ CREATE TABLE meditation (
     amount INT DEFAULT 0,
     PRIMARY KEY (id),
     FOREIGN KEY(user_id) REFERENCES users(id)
+);
+
+CREATE TABLE foods_favorites (
+    user_id INT NOT NULL,
+    food_id INT NOT NULL,
+    FOREIGN KEY(user_id) REFERENCES users(id), FOREIGN KEY(food_id) REFERENCES foods(id)
+);
+
+CREATE TABLE quotes_favorites (
+    user_id INT NOT NULL,
+    quote_id INT NOT NULL,
+    FOREIGN KEY(user_id) REFERENCES users(id), FOREIGN KEY(quote_id) REFERENCES quotes(id)
 );
