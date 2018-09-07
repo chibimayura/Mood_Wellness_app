@@ -14,30 +14,22 @@
             <div>
                 <h3>Write your rant away...</h3>
                 <form method="POST" action="/diary/create">
-                    <textarea name="text" value="" maxlength="500"></textarea>
+                    <textarea type="text" name="text" maxlength="500" placeholder="Tell me about your day in 500 words or less."></textarea>
                     <p>
                     <button>Submit</button>
                     </p>
             </div>
             <h3>Your Previous Entries:</h3>
-            <div id="journalsHere">
+            <div id="diaryEntriesHere">
                 <!-- old entries populate here -->
             </div>        
         
     </main>
-
     <footer>
         <% include ../partials/footer %>
     </footer>
+    <script src="/javascript/diaryJax.js"></script>
+
     
 </body>
 </html>
-
-<!-- CREATE TABLE diaries (
-    id INT NOT NULL AUTO_INCREMENT,
-    user_id INT NOT NULL,
-    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    text VARCHAR(500) NOT NULL,
-    PRIMARY KEY (id),
-    FOREIGN KEY(user_id) REFERENCES users(id)
-); -->
