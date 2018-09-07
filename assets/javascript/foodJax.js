@@ -16,8 +16,10 @@ $.ajax({
         upvote.attr('value', 1);
         downvote.attr('name', 'works');
         downvote.attr('value', -1);
-        upvote.text('👍');
-        downvote.text('👎');
+        upvote.html('<i class="fa fa-thumbs-up"></i> Agreed!');
+        downvote.html('<i class="fa fa-thumbs-down"></i> No way!');
+        upvote.attr('class', 'btn btn-primary tinySpace');
+        downvote.attr('class','btn btn-primary tinySpace');
 
         // make div with each food
         div = $('<div>');
@@ -28,13 +30,11 @@ $.ajax({
         formUp.attr('method', 'POST');
         formUp.attr('action', '/foods/upvote/' + id + '/' + likes);
         formUp.append(upvote);
-        formUp.append(' Agreed!')
 
         formDown = $('<form>');
         formDown.attr('method', 'POST');
         formDown.attr('action', '/foods/downvote/' + id + '/' + likes);
         formDown.append(downvote);
-        formDown.append(' No way!')
 
         
         div.append(formUp);
