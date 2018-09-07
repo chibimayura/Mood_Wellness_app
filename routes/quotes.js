@@ -36,6 +36,9 @@ router.post('/ranking', function(req, res){
 
 	var updateParams = [req.body.rank, req.body.quote_id];
 	var insertParams = [req.body.quote, req.body.mood_id];
+	var insertFav = [req.body.favorite_quote_id, req.session.user_id];
+
+
 
 	// update quotes table if user thumbs up a quote on page
 
@@ -59,8 +62,17 @@ router.post('/ranking', function(req, res){
 			  console.log('inserted');
 			  res.redirect('/quotes');
 			}
-		  );
+		  )
+	} else if (req.body.favorite_quote_id) {
+		var insertFavTable = connection.query(
+		"INSERT INTO quotes_favorites (quote_id, user_id) VALUES ( (SELECT id from quotes WHERE id = ?),  (SELECT id from users WHERE id = ?) )", insertFav, function(err, response) {
+			if (err) throw err 
+			  console.log('inserted');
+			  res.redirect('/quotes');
+			}
+		  )
 	}
+
 });
 
 

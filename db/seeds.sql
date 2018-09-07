@@ -7,7 +7,7 @@ INSERT INTO histories (user_id, mood_id) VALUES (1, 3), (1, 1), (2, 3);
 
 INSERT INTO moods (mood) VALUES ('happy'), ('sad'), ('angry'), ('neutral');
 
-INSERT INTO quotes (quote, mood_id) VALUES ('“The Way Get Started Is To Quit Talking And Begin Doing.” – Walt Disney', 1), ('“The Pessimist Sees Difficulty In Every Opportunity. The Optimist Sees Opportunity In Every Difficulty.” – Winston Churchill', 2), ('“Don’t Let Yesterday Take Up Too Much Of Today.” – Will Rogers', 3), ('“People Who Are Crazy Enough To Think They Can Change The World, Are The Ones Who Do.” – Rob Siltanen', 3);
+INSERT INTO quotes (quote, user_id, mood_id) VALUES ('“The Way Get Started Is To Quit Talking And Begin Doing.” – Walt Disney', 1, 1), ('“The Pessimist Sees Difficulty In Every Opportunity. The Optimist Sees Opportunity In Every Difficulty.” – Winston Churchill', 1, 2), ('“Don’t Let Yesterday Take Up Too Much Of Today.” – Will Rogers', 1, 3), ('“People Who Are Crazy Enough To Think They Can Change The World, Are The Ones Who Do.” – Rob Siltanen', 1, 3);
 
 INSERT INTO favorites (user_id, ranking, mood_id, section) VALUES (1, 1, 3, 'Quotes'), (1, 2, 1, 'Food'), (2, 3, 1, 'Meditation'), (3, 4, 1, 'Food'), (3, 4, 2, 'Meditation');
 
@@ -41,3 +41,14 @@ INSERT INTO foods (food_name, mood_id, info, works) VALUES
 ('Green Tea', 1, 'Contains L-theanine, an amino acid that helps fight anxiety, and a small caffeine—boost that can serve as a quick pick-me-up.', 0),
 ('Oysters', 1, 'High in Zinc, which has been shown to reduce anxiety and help with sleep.', 0),
 ('Mushrooms', 1, 'High in Selenium, which has been shown to fight depression.', 0);
+
+
+INSERT INTO foods_favorites (food_id, user_id) VALUES
+    ( (SELECT id from foods WHERE id = 1),     (SELECT id from users WHERE id = 3) ),
+    ( (SELECT id from foods WHERE id = 2),     (SELECT id from users WHERE id = 1) );
+
+INSERT INTO quotes_favorites (quote_id, user_id) VALUES
+    ( (SELECT id from quotes WHERE id = 1),     (SELECT id from users WHERE id = 1) ),
+    ( (SELECT id from quotes WHERE id = 2),     (SELECT id from users WHERE id = 1) ),
+    ( (SELECT id from quotes WHERE id = 1),     (SELECT id from users WHERE id = 2) ),
+    ( (SELECT id from quotes WHERE id = 2),     (SELECT id from users WHERE id = 1) );

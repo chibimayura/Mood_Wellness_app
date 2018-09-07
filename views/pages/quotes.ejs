@@ -29,11 +29,14 @@
             </div>
 
             <% results.forEach(function(quotes) { %>
-                <p>
-                    <form method="POST" action="quotes/ranking">
-                    <button class="btn btn-primary" name="quote_id" value="<%= quotes.id %>"><input type="hidden" name="rank" value="<%= quotes.ranking=parseInt(quotes.ranking) + 1 %>"><i class="fa fa-thumbs-up"></i> <%= quotes.ranking %> Likes </button> <%= quotes.quote %>
-                    </form>
-                </p>
+                
+                <form method="POST" action="quotes/ranking">
+                    <button class="btn btn-primary btn-sm" name="rank" value="<%= quotes.ranking=parseInt(quotes.ranking) + 1 %>"><input type="hidden" name="quote_id" value="<%= quotes.id %>"><i class="fa fa-thumbs-up"></i> <%= quotes.ranking %> Likes </button>
+                    
+                    <button class="btn btn-danger btn-sm" name="favorite_quote_id" value="<%= quotes.id %>"><i class="fa fa-heart"></i>Favorite</button> <%= quotes.quote %>
+                   
+                </form>
+                
             <% }); %>
 
             <form method="POST" action="quotes/ranking">
@@ -43,7 +46,7 @@
                         <input type="radio" name="mood_id" value="<%= m.id %>" > <%= m.mood %> </button>
                         
                     <% }); %>
-                <button class="btn btn-secondary">Submit</button> </p>
+                <button class="btn btn-secondary btn-sm">Submit</button> </p>
             </form>
         </div>          
     </main>
