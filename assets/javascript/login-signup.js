@@ -73,8 +73,9 @@ if(url.includes('/sign-up')){
 		'background-color' : '#ffffff',
 		'border-radius' : '10px',
 		'border' : '2px dashed #28a4a4',
-		'padding' : '10% 5%',
-		'overflow' : 'hidden'
+		'padding' : '5%',
+		'overflow' : 'hidden',
+		'margin-top' : '20px'
 	});
 
 

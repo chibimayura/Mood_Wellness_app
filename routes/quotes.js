@@ -13,56 +13,55 @@ var connection = mysql.createConnection({
 	database: "wellness_db"
 });
 
-//body parser to grab POST diary entries
-// const bodyParser = require('body-parser');
-// router.use(bodyParser.urlencoded({ extended: true }));
-// router.use(bodyParser.json());
+// body parser to grab POST diary entries
+const bodyParser = require('body-parser');
+router.use(bodyParser.urlencoded({ extended: true }));
+router.use(bodyParser.json());
 
 //grabs router page
 router.get('/', function(req, res){
-	
-	
-	connection.query('SELECT * FROM quotes', function(error, results, fields){
-		res.render('pages/quotes', { results: results}
-		// connection.query('SELECT mood FROM moods', function(error, moods, fields) {
-		// 	// console.log(results, moods);
-		// 	res.render('pages/quotes', { results: results, moods: moods});
-		// });
+
+	connection.query('SELECT * FROM quotes ORDER BY ranking DESC', function(error, results, fields) {
 		
-	// });
-	)}
+		connection.query('SELECT mood, id FROM moods', function(error, moods, fields) {
+			
+			res.render('pages/quotes', { results: results, moods: moods})
+			})
+		}
 	)}
 );
 
 router.post('/ranking', function(req, res){
 	console.log(req.body);
 
-	var params = [req.body.rank, req.body.quote_id];
-	var query = connection.query(
-	  "UPDATE quotes SET ranking = ? where id = ? ",
-	  params,
-	  function(err, response) {
-		console.log('inserted');
-		res.redirect('/quotes');
-	  }
-	);
+	var updateParams = [req.body.rank, req.body.quote_id];
+	var insertParams = [req.body.quote, req.body.mood_id];
+
+	// update quotes table if user thumbs up a quote on page
+
+	if (req.body.rank) {
+		var updateQuery = connection.query(
+			"UPDATE quotes SET ranking = ? where id = ? ",
+			updateParams,
+			function(err, response) {
+			  console.log('inserted');
+			  res.redirect('/quotes');
+			}
+		  );
+	} 
+	// inserts new quote submitted by user
+	else if (req.body.quote) {
+		var insertQuery = connection.query(
+			"INSERT INTO quotes (quote, mood_id) values (?, ?)",
+			insertParams,
+			function(err, response) {
+			if (err) throw err 
+			  console.log('inserted');
+			  res.redirect('/quotes');
+			}
+		  );
+	}
 });
 
-// app.post('/create-quote', function(req, res){
-// 	console.log(req.body);
 
-
-// 	// var query = connection.query(
-// 	//   "INSERT INTO quotes SET ?",
-// 	//   req.body,
-// 	//   function(err, response) {
-// 	//     res.redirect('/');
-// 	//   }
-// 	// );
-// })
-
-//GET quotes based on mood & ranking
-//POST quotes related to mood
-
-//stays at the bottom of the file to export this portion to import into server.js
 module.exports = router;
