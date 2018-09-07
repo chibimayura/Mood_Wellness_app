@@ -10,16 +10,28 @@
     </header>
 
     <main>
-        
-<!-- Diary:
-		-Allow user to enter their rant
-        -access accessible diary entries order by date, filterable by mood -->
+        <h1>Diary</h1>
+            <div>
+                <h3>Write your rant away...</h3>
+                <form method="POST" action="/diary/create">
+                    <textarea type="text" name="text" maxlength="500" placeholder="Tell me about your day in 500 words or less."></textarea>
+                    <p>
+                    <button>Submit</button>
+                    </p>
+            </div>
+            <h3>Your Previous Entries:</h3>
+            <div id="diaryEntriesHere">
+                <!-- old entries populate here -->
+            </div>        
         
     </main>
-
     <footer>
         <% include ../partials/footer %>
     </footer>
+    <% include ../partials/script %>
+
+    <script src="/javascript/diaryJax.js"></script>
+
     
 </body>
 </html>
