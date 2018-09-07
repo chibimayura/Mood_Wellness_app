@@ -50,9 +50,9 @@ router.post('/create', function(req, res){
 });
 
 
-// upvote function
+// upvote + downvote function
 
-router.post('/upvote/:id/:works', function(req, res){
+router.post('/update/:id/:works', function(req, res){
 
 	var query = connection.query(
 	  "UPDATE foods SET works = ? WHERE id = ?",
@@ -60,19 +60,6 @@ router.post('/upvote/:id/:works', function(req, res){
 	  	function(err, response) {
 			if (err) throw error;
 	    	res.redirect('/foods/');
-	  }
-	);
-	// console.log(query);
-});
-
-// downvote function
-router.post('/downvote/:id/:works', function(req, res){
-	var query = connection.query(
-	  "UPDATE foods SET works = ? WHERE id = ?",
-	  [parseFloat(req.body.works) + parseFloat(req.params.works), req.params.id],
-	  	function(err, response) {
-			if (err) throw error;
-			res.redirect('/foods/');
 	  }
 	);
 	// console.log(query);

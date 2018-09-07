@@ -25,7 +25,7 @@ router.get('/', function(req, res){
 
 // For AJAX query to add old diary entries to page
 router.get('/diaryEntries', function(req, res){
-    var query = connection.query("SELECT * FROM diaries WHERE user_id = ?",[req.session.user_id], function(error, results, body) {
+    var query = connection.query("SELECT * FROM diaries WHERE user_id = ? ORDER BY created_at DESC",[req.session.user_id], function(error, results, body) {
         if (error) throw error;
 	    res.json(results);
     });
@@ -34,33 +34,16 @@ router.get('/diaryEntries', function(req, res){
 // mysql to add diary entries to the database
 
 router.post('/create', function(req, res){
-
-	var query = connection.query("INSERT INTO diaries SET text = ? WHERE user_id = ?",[req.body, parseFloat(req.session.user_id)],
+	console.log(req.body);
+	console.log(req.session.user_id);
+	var query = connection.query("INSERT INTO diaries SET text = ?, user_id = ?",[req.body.text, req.session.user_id],
 	  function(err, response) {
-		  if (err) throw error;
+		  if (err) throw err;
 		  console.log(req.body);
 	    res.redirect('/diary');
 	  }
 	);
 });
-
-// router.post('/create', function(req, res){
-// 	console.log(req.body);
-
-// 	var query = connection.query(
-// 	  "INSERT INTO foods SET ?",
-// 	  req.body,
-// 	  function(err, response) {
-// 		  if (err) throw error;
-// 		  console.log(req.body);
-
-// 	    res.redirect('/foods');
-// 	  }
-// 	);
-// 	console.log(query);
-// });
-
-
 
 //stays at the bottom of the file to export this portion to import into server.js
 module.exports = router;
