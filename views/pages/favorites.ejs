@@ -14,13 +14,24 @@
 <!-- Favorite:
 -shows your favorite quotes, foods, songs, meditation progress
 -based on your current mood and what was saved based on that mood previously -->
-        <% favorites.forEach(function(fav) { %>
-            <p>
-                <form method="POST" action="favorites/mood">
-                <button class="btn btn-primary" name="mood_id" value="<%= moods.id %>"><input type="hidden" name="rank" value="<%= quotes.ranking=parseInt(quotes.ranking) + 1 %>"><i class="fa fa-thumbs-up"></i> <%= quotes.ranking %> Likes </button> <%= quotes.quote %>
-                </form>
-            </p>
-        <% }); %>
+        
+        <div>
+            <h5>Favorite Foods</h5>
+            <% foods.forEach(function(fav_food) { %>
+                   <li><%= fav_food.food_name %></li>
+            <% }); %>
+        </div>
+
+        <div>
+        <br>
+        <h5>Favorite Quotes</h5>
+        
+            <% quotes.forEach(function(fav_quote) { %>
+                    <li><%= fav_quote.quote %> </li> 
+            <% }); %>
+        
+        </div>
+    
     </main>
 
     <footer>

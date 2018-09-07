@@ -6,14 +6,14 @@ var router = express.Router();
 var mysql = require('mysql');
 
 //body parser to grab POST diary entries
-var bodyParser = require('body-parser');
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+const bodyParser = require('body-parser');
+router.use(bodyParser.urlencoded({ extended: true }));
+router.use(bodyParser.json());
 
 //grabs router page
-router.get('/', function(req, res){
-	res.render('pages/favorites');
-});
+// router.get('/', function(req, res){
+// 	res.render('pages/favorites');
+// });
 
 var connection = mysql.createConnection({
 	host: "localhost",
@@ -28,14 +28,17 @@ var connection = mysql.createConnection({
 
 router.get('/', function(req, res){
 
-	connection.query("SELECT quote, user_id, mood_id, section FROM favorites as f JOIN user as u on f.user_id = u.id JOIN moods as m on f.mood_id = m.id where m.mood = ?", req.body.mood, function(error, favorites, fields) {
-			
-			res.render('pages/favorites', { favorites: favorites})
-			})
-	}
-);
+	
 
-
+	connection.query("SELECT * FROM foods JOIN foods_favorites on foods.id = foods_favorites.food_id where foods_favorites.user_id = ?", [req.session.user_id], function(error, foods, fields) {
+		
+		connection.query("SELECT * FROM quotes JOIN quotes_favorites on quotes.id = quotes_favorites.quote_id where quotes_favorites.user_id = ?", [req.session.user_id], function(error, quotes, fields) {
+			console.log(foods, quotes);
+			res.render('pages/favorites', { foods: foods, quotes: quotes})
+		
+		})
+	})
+});
 
 //stays at the bottom of the file to export this portion to import into server.js
 module.exports = router;
