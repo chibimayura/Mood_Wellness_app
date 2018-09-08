@@ -32,7 +32,8 @@ var randomBgArr = [
    '/images/meditation-2.jpg', 
    '/images/meditation-3.jpg', 
    '/images/meditation-4.jpg', 
-   '/images/meditation-5.jpg'
+   '/images/meditation-5.jpg',
+   '/images/meditation-6.jpg'
 ];
 
 //stores random songs to play
