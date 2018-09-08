@@ -33,7 +33,7 @@ router.get('/', function(req, res){
 	connection.query("SELECT * FROM foods JOIN foods_favorites on foods.id = foods_favorites.food_id where foods_favorites.user_id = ?", [req.session.user_id], function(error, foods, fields) {
 		
 		connection.query("SELECT * FROM quotes JOIN quotes_favorites on quotes.id = quotes_favorites.quote_id where quotes_favorites.user_id = ?", [req.session.user_id], function(error, quotes, fields) {
-			console.log(foods, quotes);
+		
 			res.render('pages/favorites', { foods: foods, quotes: quotes})
 		
 		})
