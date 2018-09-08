@@ -26,7 +26,7 @@ var connection = mysql.createConnection({
   });
 
   router.get('/dashData', function(req, res){
-    connection.query("SELECT quotes.mood_id, quotes.quote, foods.mood_id, foods.food_name, foods.info FROM quotes, foods ORDER BY RAND()", function(error, results, body) {
+    connection.query("SELECT quotes.quote, foods.food_name, foods.info FROM quotes, foods ORDER BY RAND()", function(error, results, body) {
 		if (error) throw error;
 			res.json(results);
     });
