@@ -80,62 +80,62 @@ if(url.includes('/sign-up')){
 	});
 
 
-//form is preventDefault until meets requirements
-formSelector.submit( function(ev){
-	ev.preventDefault();
+	//form is preventDefault until meets requirements
+	formSelector.submit( function(ev){
+		ev.preventDefault();
 
-	//if username and emails are available they can register
-	if(canUsername && canEmail){
-		formSelector.attr({
-			'method' : 'POST',
-			'action' : '/signing-up'
-		});
-		formSelector.unbind('submit').submit();
-	}
-});
+		//if username and emails are available they can register
+		if(canUsername && canEmail){
+			formSelector.attr({
+				'method' : 'POST',
+				'action' : '/signing-up'
+			});
+			formSelector.unbind('submit').submit();
+		}
+	});
 
-//check if input vals are empty
-$(document).on('click', 'button', function(event){
+	//check if input vals are empty
+	$(document).on('click', 'button', function(event){
 
-	$('[data-toggle="popover"]').popover('hide');
+		$('[data-toggle="popover"]').popover('hide');
 
-	if($(this).siblings('#email').val() == ''){
-		$('#email').popover('show');
-	} else if($(this).siblings('#username').val() == ''){
-		$('#username').popover('show');
-	} else if($(this).siblings('#password').val() == ''){
-		$('#password').popover('show');
-	} else if($(this).siblings('#password').val() != $(this).siblings('#repassword').val()){
-		$(this).siblings('#repassword').attr('data-content', 'Passwords does not match!').popover('show');
-	} else{
-		/*
-			Ajax to grab database information on users and emails to check if it's used or not
-			Check if password and repassword are the same
-		*/
-		$.ajax({
-			url : '/user-database',
-			method : 'GET'
-		}).then(function(data){
-			for(var i = 0; i < data.length; i++){
-				if(data[i].email == $('#email').val()){
-					$('#email').attr('data-content', 'Email is not available').popover('show');
-					canEmail = false;
-					break;
-				} else{
-					$('#email').popover('hide');
-					canEmail = true;
+		if($(this).siblings('#email').val() == ''){
+			$('#email').popover('show');
+		} else if($(this).siblings('#username').val() == ''){
+			$('#username').popover('show');
+		} else if($(this).siblings('#password').val() == ''){
+			$('#password').popover('show');
+		} else if($(this).siblings('#password').val() != $(this).siblings('#repassword').val()){
+			$(this).siblings('#repassword').attr('data-content', 'Passwords does not match!').popover('show');
+		} else{
+			/*
+				Ajax to grab database information on users and emails to check if it's used or not
+				Check if password and repassword are the same
+			*/
+			$.ajax({
+				url : '/user-database',
+				method : 'GET'
+			}).then(function(data){
+				for(var i = 0; i < data.length; i++){
+					if(data[i].email == $('#email').val()){
+						$('#email').attr('data-content', 'Email is not available').popover('show');
+						canEmail = false;
+						break;
+					} else{
+						$('#email').popover('hide');
+						canEmail = true;
+					}
+
+					if(data[i].username == $('#username').val()){
+						$('#username').attr('data-content', 'Username is not available').popover('show');
+						canUsername = false;
+						break;
+					} else{
+						$('#username').popover('hide');
+						canUsername = true;
+					}
 				}
-
-				if(data[i].username == $('#username').val()){
-					$('#username').attr('data-content', 'Username is not available').popover('show');
-					canUsername = false;
-					break;
-				} else{
-					$('#username').popover('hide');
-					canUsername = true;
-				}
-			}
-		});
-	}
-});
+			});
+		}
+	});
 }
