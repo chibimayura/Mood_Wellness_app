@@ -32,6 +32,18 @@
             height: 100%;
             position: absolute;
         }
+        h1 {
+            width: 15%;
+            background-color: #fff;
+            opacity: 0.6;
+            text-shadow: 3px 3px 5px #000;
+            color: #99ffeb;
+            font-size: 700%;
+            text-align: center;
+            margin: auto;
+            padding: 2px;
+            border-radius: 10px;
+        }
     </style>
 </head>
 <body>
@@ -39,7 +51,6 @@
     <header>
         <% include ../partials/header %>
     </header>
-    <div id='background'></div>
     <main>
         
 <!-- Meditation:
@@ -47,10 +58,14 @@
         -a button to allow user to start meditation
         -have user pick set time to meditate for(1 min, 5 min, 10 min, nonstop) -->
         <!-- .js will use ajax's POST method -->
-        <form method="POST" action="/amount-meditated">
-            <button class="btn">1:00</button>
-            <button class="btn">5:00</button>
-            <button class="btn">10:00</button>
+        <form id="delaySubmit" method="POST" action="/meditation/amount-meditated">
+            <input type="button" class="btn" name="amount" value="1:00"></input>
+            <input type="button" class="btn" name="amount" value="5:00"></input>
+            <input type="button" class="btn" name="amount" value="10:00"></input>
+            <h1 id="timer">
+                <span id="minutes"></span>:
+                <span id="seconds"></span>
+            </h1>
         </form>
         <!-- <button class="btn">Non-stop</button> -->
         
@@ -60,9 +75,12 @@
         <% include ../partials/footer %>
     </footer>
     
-        <% include ../partials/script %>
+    <!-- SCRIPT -->
+    <% include ../partials/script %>
 
-        <script src="/javascript/meditationJax.js"></script>
+    <!-- Script controlling the meditation POSTing -->
+    <script src="/javascript/meditationJax.js"></script>
+
 </body>
 </html>
 
