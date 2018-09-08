@@ -39,6 +39,7 @@ var newInputInfo = [
 
 //new button for sign up form
 var submitBtn = $('<button>').html('Submit').attr('class', 'btn');
+var loginRoute = $('<a>').attr('href', '/').text('Login');
 
 //putting the form onto the page, if on /sign-up route
 if(url.includes('/sign-up')){
@@ -69,7 +70,7 @@ if(url.includes('/sign-up')){
 		formSelector.append(newP, newInput);
 	}
 
-	formSelector.append(submitBtn).css({
+	formSelector.append(submitBtn, loginRoute).css({
 		'background-color' : '#ffffff',
 		'border-radius' : '10px',
 		'border' : '2px dashed #28a4a4',
