@@ -25,12 +25,16 @@ var connection = mysql.createConnection({
 	database: "wellness_db"
   });
 
+	//GET random info on quotes, foods, and songs based on mood
+
   router.get('/dashData', function(req, res){
     connection.query("SELECT quotes.mood_id, quotes.quote, foods.mood_id, foods.food_name, foods.info FROM quotes, foods ORDER BY RAND()", function(error, results, body) {
 		if (error) throw error;
 			res.json(results);
     });
 });
+
+// add diary entries to diary page but redirect to dashboard
 
 router.post('/create', function(req, res){
 	console.log(req.body);
@@ -43,10 +47,15 @@ router.post('/create', function(req, res){
 	  }
 	);
 });
+
 //GET info on meditation status
-//GET random info on quotes, foods, and songs based on mood
 
-
+router.get('/dashDataMeditate', function(req, res){
+	connection.query("SELECT did_meditate, amount FROM meditation WHERE user_id = ?", req.session.user_id, function(error, results, body) {
+	if (error) throw error;
+		res.json(results[0]);
+	});
+});
 
 //stays at the bottom of the file to export this portion to import into server.js
 module.exports = router;
