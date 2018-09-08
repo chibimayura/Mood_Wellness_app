@@ -15,8 +15,14 @@
 	}).then(function(data){
 		if(data.length != 0){
 			$('#usernameHere').text(data.user_name);
+				if (data.mood_id == '1') mood = 'happy';
+				if (data.mood_id == '2') mood = 'sad';
+				if (data.mood_id == '3') mood = 'angry';
+				if (data.mood_id == '4') mood = 'neutral';
+			$('#userMood').text(mood);
 		}else {
 			$('#usernameHere').text('YOU');
+			$('#userMood').text('SOME FEELINGS');
 		}
 	});
 </script>
