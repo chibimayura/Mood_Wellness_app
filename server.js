@@ -22,7 +22,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 //grabbing servers
-
+//login page as index
 var logInRoute = require('./routes/login.js');
 app.use('/', logInRoute);
 
@@ -53,10 +53,6 @@ app.use('/mood', moodRoute);
 //Quotes Page
 var quotesRoute = require('./routes/quotes.js');
 app.use('/quotes', quotesRoute);
-
-//Songs Page
-var songRoute = require('./routes/songs.js');
-app.use('/songs', songRoute);
 
 app.listen(3000, function(){
 	console.log('Running the server on PORT 3000');

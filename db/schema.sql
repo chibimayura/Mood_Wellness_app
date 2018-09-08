@@ -37,8 +37,6 @@ CREATE TABLE histories (
     FOREIGN KEY(mood_id) REFERENCES moods(id)
 );
 
--- do we need user id in quotes?
-
 CREATE TABLE quotes (
     id INT NOT NULL AUTO_INCREMENT,
     quote VARCHAR(500) NOT NULL,

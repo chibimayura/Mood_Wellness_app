@@ -1,12 +1,9 @@
 var formSelector = $('form');
-var optionSelector = $('option');
 
 formSelector.submit(function(ev){
 	ev.preventDefault();
-	console.log(optionSelector.text());
-	if(optionSelector.text() != "I'm feeling..."){
+	console.log($('select option:selected').text());
+	if($('select option:selected').text() != "I'm feeling..."){
 		formSelector.unbind('submit').submit();
-	}else{
-		ev.preventDefault();
 	}
 });

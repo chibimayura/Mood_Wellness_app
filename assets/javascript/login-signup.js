@@ -81,7 +81,7 @@ if(url.includes('/sign-up')){
 
 
 	//form is preventDefault until meets requirements
-	formSelector.submit( function(ev){
+	formSelector.submit(function(ev){
 		ev.preventDefault();
 
 		//if username and emails are available they can register
