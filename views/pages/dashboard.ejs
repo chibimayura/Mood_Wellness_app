@@ -17,34 +17,37 @@
             </span> 
             today? Try these:</h3>
         <div id="dashDivContainer">
-            <div class="dashDiv" id="randQuotes">
-                <h5>Quotes</h5>
-                <!-- random quotes here -->
-            </div>
+            <div class="row mb-3">
+                <div class="col-sm-6 dashDiv" id="randQuotes">
+                    <h5>Quotes</h5>
+                    <!-- random quotes here -->
+                </div>
 
-            <div class="dashDiv" id="randFoods">
-                <h5>Foods</h5>
-                <!-- random foods here -->
+                <div class="col-sm-6 dashDiv" id="randFoods">
+                    <h5>Foods</h5>
+                    <!-- random foods here -->
+                </div>
             </div>
-
-            <div class="dashDiv" id="quickDiary">
-                <h5>Diary Quick Entry</h5>
-                <form method="POST" action="/dashboard/create">
-                    <textarea type="text" name="text" maxlength="500" placeholder="Quick Entry! Write your feelings away..." id="dashTextArea"></textarea>
-                    <p>
-                    <button>Submit</button>
-                    </p>
-                    <p>
-                    <a href="/diary">Go to your Diary archive.</a>
-                    </p>       
-                </form>
-            </div>
-            <div class="dashDiv">
-                <h5>Meditated yet?</h5>
-                <span id="meditatedToday">
-                <!-- meditation here -->
-                </span>
-                <a href="/meditation">Get your Zen on...</a>
+            <div class="row mb-3">
+                <div class="col-sm-6 dashDiv" id="quickDiary">
+                    <h5>Diary Quick Entry</h5>
+                    <form method="POST" action="/dashboard/create">
+                        <textarea type="text" name="text" maxlength="500" placeholder="Quick Entry! Write your feelings away..." id="dashTextArea"></textarea>
+                        <p>
+                        <button>Submit</button>
+                        </p>
+                        <p>
+                        <a href="/diary">Go to your Diary archive.</a>
+                        </p>       
+                    </form>
+                </div>
+                <div class="col-sm-6 dashDiv">
+                    <h5>Meditated yet?</h5>
+                    <span id="meditatedToday">
+                    <!-- meditation here -->
+                    </span>
+                    <a href="/meditation">Get your Zen on...</a>
+                </div>
             </div>
         </div>
     </main>
