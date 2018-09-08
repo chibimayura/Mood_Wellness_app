@@ -29,9 +29,16 @@
 
             <div class="dashDiv" id="quickDiary">
                 <h5>Diary Quick Entry</h5>
-                <!-- diary entry here -->
+                <form method="POST" action="/dashboard/create">
+                    <textarea type="text" name="text" maxlength="500" placeholder="Quick Entry! Write your feelings away..." id="dashTextArea"></textarea>
+                    <p>
+                    <button>Submit</button>
+                    </p>
+                    <p>
+                    <a href="/diary">Go to your Diary archive.</a>
+                    </p>       
+                </form>
             </div>
-
             <div class="dashDiv" id="meditatedToday">
                 <h5>Meditated yet?</h5>
                 <!-- meditation here -->
@@ -45,5 +52,7 @@
         <% include ../partials/script %>
 
         <script src="/javascript/dashboardJax.js"></script>
+        <script src="/javascript/dashDiaryJax.js"></script>
+
 </body>
 </html>
