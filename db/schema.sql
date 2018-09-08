@@ -41,12 +41,11 @@ CREATE TABLE histories (
 
 CREATE TABLE quotes (
     id INT NOT NULL AUTO_INCREMENT,
-    user_id INT NOT NULL,
     quote VARCHAR(500) NOT NULL,
     ranking INT DEFAULT 0,
     mood_id INT NOT NULL,
     PRIMARY KEY (id),
-    FOREIGN KEY(mood_id) REFERENCES moods(id), FOREIGN KEY(user_id) REFERENCES users(id)
+    FOREIGN KEY(mood_id) REFERENCES moods(id)
 );
 
 -- CREATE TABLE favorites (

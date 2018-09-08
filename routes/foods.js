@@ -5,10 +5,6 @@ var router = express.Router();
 //grab database to store quick diary entries
 var mysql = require('mysql');
 
-var bodyParser = require('body-parser');
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-
 // connects to mysql
 var connection = mysql.createConnection({
 	host: "localhost",
@@ -46,7 +42,7 @@ router.post('/create', function(req, res){
 	    res.redirect('/foods');
 	  }
 	);
-	console.log(query);
+	console.log(createQuery);
 });
 
 
