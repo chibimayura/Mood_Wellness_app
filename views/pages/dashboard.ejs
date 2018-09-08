@@ -10,17 +10,40 @@
     </header>
 
     <main>
-        
-<!-- Dashboard:
-		-displays your mood today
-		-shows recommended quotes, foods, songs, meditation stamppad
-        -maybe show preview of accessible diary entries based on that mood -->
-        
+        <h1>Dashboard</h1>
+        <h3>Feeling 
+            <span>
+                <!-- mood populates here -->
+            </span> 
+            today? Try these:</h3>
+        <div id="dashDivContainer">
+            <div class="dashDiv" id="randQuotes">
+                <h5>Quotes</h5>
+                <!-- random quotes here -->
+            </div>
+
+            <div class="dashDiv" id="randFoods">
+                <h5>Foods</h5>
+                <!-- random foods here -->
+            </div>
+
+            <div class="dashDiv" id="quickDiary">
+                <h5>Diary Quick Entry</h5>
+                <!-- diary entry here -->
+            </div>
+
+            <div class="dashDiv" id="meditatedToday">
+                <h5>Meditated yet?</h5>
+                <!-- meditation here -->
+            </div>
+        </div>
     </main>
 
     <footer>
         <% include ../partials/footer %>
     </footer>
-    
+        <% include ../partials/script %>
+
+        <script src="/javascript/dashboardJax.js"></script>
 </body>
 </html>
