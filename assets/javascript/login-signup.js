@@ -6,6 +6,7 @@ var url = window.location.href;
 var newInput, newP; //creating new inputs and p tags for signup page, new span for popovers
 var canSignUp = false; //checks if user's input meets all requirements
 var canEmail = false, canUsername = false; //checks if email or username is available
+var isValidUser = false;
 var formSelector = $('form'); //selects the form on the page
 
 //Input type = even index, input attr = odd index
