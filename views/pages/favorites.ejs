@@ -7,6 +7,12 @@
 
     <header>
         <% include ../partials/header %>
+        <style>
+        body {
+            font-family: sans-serif;
+            font-size: 14px;
+        }
+        </style>
     </header>
 
     <main>
@@ -23,8 +29,10 @@
         </div>
 
         <div>
-        <br>
-        <h5>Favorite Quotes</h5>
+        
+            <br>
+        
+            <h5>Favorite Quotes</h5>
         
             <% quotes.forEach(function(fav_quote) { %>
                     <li><%= fav_quote.quote %> </li> 

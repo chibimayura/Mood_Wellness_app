@@ -20,10 +20,17 @@
             <h2>Quotes</h2>
             <br>
             <div>
+
+                
                 <h5 id="runquote"></h5>
-                <button class="btn btn-success" id="get-another-quote-button">New Quote</button>
-                <button class="btn btn-secondary" id="get-another-quote-button">Add to List</button>
+
+                
+                <form method="POST" action="quotes/add">
+                    <button class="btn btn-success" id="get-another-quote-button">New Quote</button>
+                
+                    <button class="btn btn-secondary" id="add-quote-button">Add to List</button>
                
+                </form>
                 <!-- Code here to grab quote and render on page -->
 
             </div>
@@ -31,10 +38,9 @@
             <% results.forEach(function(quotes) { %>
                 
                 <form method="POST" action="quotes/ranking">
-                    <button class="btn btn-primary btn-sm" name="rank" value="<%= quotes.ranking=parseInt(quotes.ranking) + 1 %>"><input type="hidden" name="quote_id" value="<%= quotes.id %>"><i class="fa fa-thumbs-up"></i> <%= quotes.ranking %> Likes </button>
+                    <button class="btn btn-primary btn-xs" name="rank" value="<%= quotes.ranking=parseInt(quotes.ranking) + 1 %>"><input type="hidden" name="quote_id" value="<%= quotes.id %>"><i class="fa fa-thumbs-up"></i> <%= quotes.ranking %></button>
                     
-                    <button class="btn btn-danger btn-sm" name="favorite_quote_id" value="<%= quotes.id %>"><i class="fa fa-heart"></i>Favorite</button> <%= quotes.quote %>
-                   
+                    <button class="btn btn-danger btn-xs" name="favorite_quote_id" value="<%= quotes.id %>"><i class="fa fa-heart"></i></button> <%= quotes.quote %><br>
                 </form>
                 
             <% }); %>

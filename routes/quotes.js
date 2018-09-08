@@ -26,11 +26,27 @@ router.get('/', function(req, res){
 	)}
 );
 
+router.post('/add', function(req, res) {
+
+	var quoteParams = [req.body.quote, req.session.current_mood, req.session.user_id]
+	if (req.body.quote) {
+		var insertQuote = connection.query(
+			"INSERT INTO quotes (quote, mood_id, user_id) values (?, ?, (SELECT id from users WHERE id = ?))",
+			quoteParams,
+			function(err, response) {
+			if (err) throw err 
+			  console.log('inserted');
+			  res.redirect('/quotes');
+			})
+	}
+
+});
+
 router.post('/ranking', function(req, res){
 	console.log(req.body);
 
 	var updateParams = [req.body.rank, req.body.quote_id];
-	var insertParams = [req.body.quote, req.body.mood_id];
+	var insertParams = [req.body.quote, req.body.mood_id, req.session.user_id];
 	var insertFav = [req.body.favorite_quote_id, req.session.user_id];
 
 
@@ -50,7 +66,7 @@ router.post('/ranking', function(req, res){
 	// inserts new quote submitted by user
 	else if (req.body.quote) {
 		var insertQuery = connection.query(
-			"INSERT INTO quotes (quote, mood_id) values (?, ?)",
+			"INSERT INTO quotes (quote, mood_id, user_id) values (?, ?, (SELECT id from users WHERE id = ?))",
 			insertParams,
 			function(err, response) {
 			if (err) throw err 
@@ -67,8 +83,6 @@ router.post('/ranking', function(req, res){
 			}
 		  )
 	}
-
 });
-
 
 module.exports = router;
