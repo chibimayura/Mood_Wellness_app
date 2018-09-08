@@ -1,7 +1,7 @@
 var express = require('express');
 var app = express();
 var router = express.Router();
-// var bcrypt = require('bcryptjs');
+var bcrypt = require('bcryptjs');
 
 //grab database to store quick diary entries
 var mysql = require('mysql');
@@ -23,49 +23,51 @@ router.get('/', function(req, res){
 //POST username and password
 router.post('/logging-in', function(req, res){
 
-	connection.query('SELECT * FROM users WHERE username = ? AND password = ?', [req.body.username, req.body.password], function(error, results, fields){
+	connection.query('SELECT * FROM users WHERE username = ?', [req.body.username], function(error, results, fields){
 		if(error) throw error;
 
 		if(results.length == 0){
 			res.redirect('/sign-up');
 		}else {
-			//grabs user's info
-			req.session.user_id = results[0].id;
-			req.session.user_name = results[0].username;
+			bcrypt.compare(req.body.password, results[0].password, function(err, data){
+				if(data){
+					//grabs user's info
+					req.session.user_id = results[0].id;
+					req.session.user_name = results[0].username;
 
-			//grabs login date and stores into session to check if already logged mood that day and only add amount of time meditated that day
-			var currentLoginDate = new Date();
-			currentLoginDate = JSON.stringify(currentLoginDate).slice(1,11);
-			req.session.login_time = currentLoginDate;
+					//grabs login date and stores into session to check if already logged mood that day and only add amount of time meditated that day
+					var currentLoginDate = new Date();
+					currentLoginDate = JSON.stringify(currentLoginDate).slice(1,11);
+					req.session.login_time = currentLoginDate;
 
-			//checks if user logged their mood today
-			connection.query('SELECT created_at, mood_id FROM histories WHERE user_id = ?', [req.session.user_id], function(error, results, fields){
+					//checks if user logged their mood today
+					connection.query('SELECT created_at, mood_id FROM histories WHERE user_id = ?', [req.session.user_id], function(error, results, fields){
 
-				if(results.length == 0){
-					//creating a new meditation log
-					connection.query('INSERT INTO meditation SET user_id = ?', [req.session.user_id], function(error, results){
-						console.log('created meditation log starting at 0 times meditated');
-						res.redirect('/mood');
-					})
-				} else {
-					//checks last login date for comparison with current login time
-					var lastLoginDate = JSON.stringify(results[results.length-1].created_at).slice(1,11);
+						if(results.length == 0){
+							//creating a new meditation log
+							connection.query('INSERT INTO meditation SET user_id = ?', [req.session.user_id], function(error, results){
+								console.log('created meditation log starting at 0 times meditated');
+								res.redirect('/mood');
+							})
+						} else {
+							//checks last login date for comparison with current login time
+							var lastLoginDate = JSON.stringify(results[results.length-1].created_at).slice(1,11);
 
-					if(lastLoginDate == currentLoginDate){
-						req.session.current_mood = results[results.length-1].mood_id;
-						req.session.current_login_date = lastLoginDate;
-						res.redirect('/dashboard');
-					} else{
-						//creating a new meditation log
-						connection.query('INSERT INTO meditation SET user_id = ?', [req.session.user_id], function(error, results){
-							console.log('created meditation log starting at 0 times meditated');
-							res.redirect('/mood');
-						})
-					}
+							if(lastLoginDate == currentLoginDate){
+								req.session.current_mood = results[results.length-1].mood_id;
+								req.session.current_login_date = lastLoginDate;
+								res.redirect('/dashboard');
+							} else{
+								//creating a new meditation log
+								connection.query('INSERT INTO meditation SET user_id = ?', [req.session.user_id], function(error, results){
+									console.log('created meditation log starting at 0 times meditated');
+									res.redirect('/mood');
+								})
+							}
+						}
+					});
 				}
-
 			});
-
 		}
 	});
 
@@ -104,11 +106,15 @@ router.get('/sign-up', function(req, res){
 });
 
 router.post('/signing-up', function(req, res){
+	bcrypt.genSalt(10, function(err, salt){
+		bcrypt.hash(req.body.password, salt, function(err, p_hash){
+			connection.query('INSERT INTO users SET username = ?, email = ?, password = ?', [req.body.username, req.body.email, p_hash], function(error, results){
+				if(error) throw error;
 
-	connection.query('INSERT INTO users SET username = ?, email = ?, password = ?', [req.body.username, req.body.email, req.body.password], function(error, results){
-		if(error) throw error;
-
-		res.redirect('/');
+				console.log('signed up with unique email, username and encrypted password');
+				res.redirect('/');
+			});
+		});
 	});
 });
 
