@@ -16,6 +16,21 @@ router.get('/', function(req, res){
 	res.render('pages/dashboard');
 });
 
+// connects to mysql
+var connection = mysql.createConnection({
+	host: "localhost",
+	port: 3306,
+	user: "root",
+	password: "password",
+	database: "wellness_db"
+  });
+
+  router.get('/dashData', function(req, res){
+    connection.query("SELECT quotes.mood_id, quotes.quote, foods.mood_id, foods.food_name, foods.info FROM quotes, foods ORDER BY RAND()", function(error, results, body) {
+		if (error) throw error;
+			res.json(results);
+    });
+});
 //GET info on meditation status
 //GET random info on quotes, foods, and songs based on mood
 
