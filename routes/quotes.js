@@ -13,11 +13,6 @@ var connection = mysql.createConnection({
 	database: "wellness_db"
 });
 
-// body parser to grab POST diary entries
-const bodyParser = require('body-parser');
-router.use(bodyParser.urlencoded({ extended: true }));
-router.use(bodyParser.json());
-
 //grabs router page
 router.get('/', function(req, res){
 
