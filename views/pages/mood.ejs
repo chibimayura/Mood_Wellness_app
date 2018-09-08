@@ -6,52 +6,7 @@
 
     <!-- CSS -->
     <% include ../partials/head %>
-
-    <style>
-        html, body, main {
-            height: 100%;
-            width: 100%;
-            margin: auto;
-        }
-        body {
-            background-color: #ffcccc;
-            color: black;
-            font-family: sans-serif;
-            font-size: 12px;
-            line-height: 18px;
-            text-align: center;
-            top: 50%;
-            bottom: 50%;        
-        }
-        h1 {
-            font-size: 40px;
-            line-height: 150%;
-            color: #ff8080;
-        }
-        main {
-            position: fixed;
-            top: 25%;
-            background-color: transparent !important;
-        }
-        select{
-            width: 200px;
-            color: #ff6666;
-            font-size: 20px;
-            font-family: cursive;
-            font-weight: bold;
-            padding: 5px 0;
-            margin: auto;
-            text-align: center;
-        }
-        .btn {
-            background-color: #ff8080;
-            color: #ffffff;
-            margin: auto;
-        }
-        .btn:hover{
-            background-color: #ff6666;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="/css/mood.css">
 </head>
 <body>
     <main>
@@ -75,7 +30,9 @@
     <footer>
         <% include ../partials/footer %>
     </footer>
-    
+
+    <!-- SCRIPT -->
+    <% include ../partials/script %>
     <script src="/javascript/moodChecker.js"></script>
 </body>
 </html>
